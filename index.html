@@ -371,22 +371,29 @@ button { cursor:pointer; }
   color: var(--teal);
   padding-top: 6px;
 }
+.india-quote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin-bottom: 14px;
+}
 .india-num {
   font-family: var(--serif);
   font-size: clamp(56px, 7vw, 88px);
   font-weight: 300;
   color: var(--text);
   line-height: 1;
-  display: inline;
-  margin-right: 6px;
+  flex-shrink: 0;
 }
-.india-quote {
+.india-text {
   font-family: var(--serif);
-  font-size: clamp(18px, 2vw, 22px);
+  font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 300;
   color: var(--text);
   line-height: 1.4;
-  margin-bottom: 14px;
+  flex: 1;
+  min-width: 0;
 }
 .india-sub {
   font-size: 15px;
@@ -1267,7 +1274,7 @@ button { cursor:pointer; }
     <div class="india-block reveal">
       <div class="india-badge">India-Specific Risk</div>
       <div class="india-content">
-        <p class="india-quote"><span class="india-num">70%</span> of Indians eat with their hands. No fork.</p>
+        <div class="india-quote"><span class="india-num">70%</span><span class="india-text"> of Indians eat with their hands. No fork.</span></div>
         <p class="india-sub">No barrier. Every surface they touched today goes straight to their stomach.</p>
       </div>
     </div>
