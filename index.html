@@ -1147,85 +1147,127 @@ button { cursor:pointer; }
 .wa-fixed svg { flex-shrink:0; }
 
 /* =============================================
-   HOW IT WORKS — ZIG-ZAG
+   HOW IT WORKS — STICKY SCROLL (APPLE-STYLE)
    ============================================= */
-.hiw-section {
+.ahiw {
   background: var(--ivory);
-  padding: 112px 0;
+  padding-bottom: 120px;
 }
-.hiw-head {
-  max-width: 640px;
-  margin-bottom: 88px;
+.ahiw-header {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 112px 48px 80px;
 }
-.hiw-eyebrow {
+.ahiw-eyebrow {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--teal);
   margin-bottom: 18px;
 }
-.hiw-h2 {
+.ahiw-h2 {
   font-family: var(--serif);
   font-size: clamp(30px, 3.8vw, 48px);
   font-weight: 300;
   color: var(--text);
   line-height: 1.2;
   letter-spacing: -0.01em;
+  max-width: 560px;
 }
 
-.hiw-step {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 88px;
-  align-items: center;
-  padding-bottom: 80px;
-  margin-bottom: 80px;
-  border-bottom: 1px solid var(--border);
-}
-.hiw-step:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 0;
+.ahiw-body {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: flex-start;
 }
 
-/* Flip: image goes left, text goes right */
-.hiw-step--flip .hiw-img { order: -1; }
+/* LEFT — sticky image panel */
+.ahiw-media {
+  width: 56%;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 100px);
+  margin-right: 64px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--marble);
+}
+.ahiw-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.ahiw-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+  will-change: opacity, transform;
+}
+.ahiw-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
 
-.hiw-num {
+/* RIGHT — scrolling steps */
+.ahiw-steps {
+  flex: 1;
+  padding-bottom: 28vh;
+}
+.ahiw-step {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 32px;
+  border-left: 1.5px solid transparent;
+  opacity: 0.28;
+  transition: opacity 0.5s ease, border-color 0.5s ease;
+}
+.ahiw-step.is-active {
+  opacity: 1;
+  border-left-color: var(--gold);
+}
+.ahiw-step:first-child { min-height: 50vh; }
+.ahiw-step:last-child  { min-height: 50vh; }
+.ahiw-step-img { display: none; }
+
+.ahiw-num {
   font-family: var(--serif);
-  font-size: 52px;
+  font-size: 44px;
   font-weight: 300;
   color: var(--border);
   line-height: 1;
   margin-bottom: 20px;
 }
-.hiw-title {
+.ahiw-title {
   font-family: var(--serif);
-  font-size: clamp(22px, 2.6vw, 32px);
+  font-size: clamp(22px, 2.5vw, 34px);
   font-weight: 300;
   color: var(--text);
   line-height: 1.3;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
 }
-.hiw-desc {
+.ahiw-desc {
   font-size: 14px;
   color: var(--muted);
   font-weight: 300;
   line-height: 1.85;
+  max-width: 320px;
 }
 
-.hiw-img {
-  border-radius: 3px;
-  overflow: hidden;
-  line-height: 0;
+@media (prefers-reduced-motion: reduce) {
+  .ahiw-img { transition: opacity 0.15s; transform: none !important; }
+  .ahiw-step { transition: opacity 0.15s; }
 }
-.hiw-img img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 3px;
-}
-.hiw-img .img-m { display: none; }
 
 /* =============================================
    SCROLL REVEAL
@@ -1241,10 +1283,15 @@ button { cursor:pointer; }
    RESPONSIVE
    ============================================= */
 @media (max-width: 960px) {
-  .hiw-step { grid-template-columns:1fr; gap:32px; padding-bottom:56px; margin-bottom:56px; }
-  .hiw-step--flip .hiw-img { order:-1; }
-  .hiw-img .img-d { display:none; }
-  .hiw-img .img-m { display:block; }
+  .ahiw-header { padding: 72px 28px 48px; }
+  .ahiw-body { flex-direction: column; padding: 0 28px; }
+  .ahiw-media { display: none; }
+  .ahiw-steps { width: 100%; padding-bottom: 0; }
+  .ahiw-step { min-height: auto; opacity: 1; border-left: none; padding: 0 0 52px; }
+  .ahiw-step.is-active { border-left: none; }
+  .ahiw-step:first-child, .ahiw-step:last-child { min-height: auto; }
+  .ahiw-step-img { display: block; border-radius: 3px; overflow: hidden; margin-bottom: 28px; }
+  .ahiw-step-img img { width: 100%; height: auto; display: block; }
   .wrap, .nav-inner, .footer-inner, .fear-inner { padding-left:28px; padding-right:28px; }
   .hero { background-image: url('mobile-hero.png'); background-position: top center; }
   .hero::before { background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.88) 74%, rgba(0,0,0,0.97) 100%); }
@@ -1471,67 +1518,66 @@ button { cursor:pointer; }
 </section>
 
 <!-- =============================================
-     HOW IT WORKS — ZIG-ZAG
+     HOW IT WORKS — STICKY SCROLL
      ============================================= -->
-<section class="hiw-section" id="how-it-works" aria-labelledby="hiw-heading">
-  <div class="wrap">
-    <div class="hiw-head reveal">
-      <div class="hiw-eyebrow">The Moment</div>
-      <h2 id="hiw-heading" class="hiw-h2">30 seconds. A guest who feels cared for.</h2>
-    </div>
-
-    <!-- Step 1: text left, image right -->
-    <div class="hiw-step reveal">
-      <div class="hiw-text">
-        <div class="hiw-num">01</div>
-        <h3 class="hiw-title">It's on the table when they sit down.</h3>
-        <p class="hiw-desc">Before the menu. Before the water. A sealed packet that tells them — we thought about this.</p>
-      </div>
-      <div class="hiw-img">
-        <img src="hiw-1-d.png" alt="Guest reaches for a DineWipe packet on the restaurant table" loading="lazy" class="img-d">
-        <img src="hiw-1-m.png" alt="Guest reaches for a DineWipe packet on the restaurant table" loading="lazy" class="img-m">
-      </div>
-    </div>
-
-    <!-- Step 2: image left, text right -->
-    <div class="hiw-step hiw-step--flip reveal">
-      <div class="hiw-text">
-        <div class="hiw-num">02</div>
-        <h3 class="hiw-title">Sealed. Untouched. Theirs.</h3>
-        <p class="hiw-desc">Every wipe leaves the factory sealed and arrives at their hands the same way. No one else touched it. Just them.</p>
-      </div>
-      <div class="hiw-img">
-        <img src="hiw-2-d.png" alt="Guest peels open a sealed DineWipe sachet" loading="lazy" class="img-d">
-        <img src="hiw-2-m.png" alt="Guest peels open a sealed DineWipe sachet" loading="lazy" class="img-m">
-      </div>
-    </div>
-
-    <!-- Step 3: text left, image right -->
-    <div class="hiw-step reveal">
-      <div class="hiw-text">
-        <div class="hiw-num">03</div>
-        <h3 class="hiw-title">Phone. ATM. Car door. Gone.</h3>
-        <p class="hiw-desc">Whatever they touched before walking in doesn't follow them to your food. 30 seconds. Clean hands before the first bite.</p>
-      </div>
-      <div class="hiw-img">
-        <img src="hiw-3-d.png" alt="Guest wipes hands clean with a DineWipe before eating" loading="lazy" class="img-d">
-        <img src="hiw-3-m.png" alt="Guest wipes hands clean with a DineWipe before eating" loading="lazy" class="img-m">
-      </div>
-    </div>
-
-    <!-- Step 4: image left, text right -->
-    <div class="hiw-step hiw-step--flip reveal">
-      <div class="hiw-text">
-        <div class="hiw-num">04</div>
-        <h3 class="hiw-title">Your logo leaves with them.</h3>
-        <p class="hiw-desc">Custom-branded packets go in pockets, purses, gloveboxes. Every use after this meal is a reminder — with your name on it.</p>
-      </div>
-      <div class="hiw-img">
-        <img src="hiw-4-d.png" alt="Guest keeps a branded DineWipe packet in their bag" loading="lazy" class="img-d">
-        <img src="hiw-4-m.png" alt="Guest keeps a branded DineWipe packet in their bag" loading="lazy" class="img-m">
-      </div>
-    </div>
+<section class="ahiw" id="how-it-works" aria-labelledby="ahiw-heading">
+  <div class="ahiw-header reveal">
+    <div class="ahiw-eyebrow">The Moment</div>
+    <h2 id="ahiw-heading" class="ahiw-h2">30 seconds. A guest who feels cared for.</h2>
   </div>
+
+  <div class="ahiw-body">
+    <!-- LEFT: sticky image panel — desktop only -->
+    <div class="ahiw-media" aria-hidden="true">
+      <div class="ahiw-img-wrap">
+        <img class="ahiw-img is-active" src="hiw-1-d.png" alt="" data-ahiw-step="1" loading="eager">
+        <img class="ahiw-img" src="hiw-2-d.png" alt="" data-ahiw-step="2" loading="lazy">
+        <img class="ahiw-img" src="hiw-3-d.png" alt="" data-ahiw-step="3" loading="lazy">
+        <img class="ahiw-img" src="hiw-4-d.png" alt="" data-ahiw-step="4" loading="lazy">
+      </div>
+    </div>
+
+    <!-- RIGHT: scrolling steps -->
+    <div class="ahiw-steps">
+
+      <div class="ahiw-step is-active" data-ahiw-step="1">
+        <div class="ahiw-step-img">
+          <img src="hiw-1-m.png" alt="Guest reaches for a DineWipe on the table" loading="lazy">
+        </div>
+        <div class="ahiw-num">01</div>
+        <h3 class="ahiw-title">It's on the table when they sit down.</h3>
+        <p class="ahiw-desc">Before the menu. Before the water. A sealed packet that tells them — we thought about this.</p>
+      </div>
+
+      <div class="ahiw-step" data-ahiw-step="2">
+        <div class="ahiw-step-img">
+          <img src="hiw-2-m.png" alt="Guest peels open a sealed DineWipe sachet" loading="lazy">
+        </div>
+        <div class="ahiw-num">02</div>
+        <h3 class="ahiw-title">Sealed. Untouched. Theirs.</h3>
+        <p class="ahiw-desc">Every wipe leaves the factory sealed and arrives at their hands the same way. No one else touched it. Just them.</p>
+      </div>
+
+      <div class="ahiw-step" data-ahiw-step="3">
+        <div class="ahiw-step-img">
+          <img src="hiw-3-m.png" alt="Guest wipes hands clean before eating" loading="lazy">
+        </div>
+        <div class="ahiw-num">03</div>
+        <h3 class="ahiw-title">Phone. ATM. Car door. Gone.</h3>
+        <p class="ahiw-desc">Whatever they touched before walking in doesn't follow them to your food. 30 seconds. Clean hands before the first bite.</p>
+      </div>
+
+      <div class="ahiw-step" data-ahiw-step="4">
+        <div class="ahiw-step-img">
+          <img src="hiw-4-m.png" alt="Guest keeps a branded DineWipe packet" loading="lazy">
+        </div>
+        <div class="ahiw-num">04</div>
+        <h3 class="ahiw-title">Your logo leaves with them.</h3>
+        <p class="ahiw-desc">Custom-branded packets go in pockets, purses, gloveboxes. Every use after this meal is a reminder — with your name on it.</p>
+      </div>
+
+    </div><!-- /ahiw-steps -->
+  </div><!-- /ahiw-body -->
 </section>
 
 <!-- =============================================
@@ -1962,6 +2008,37 @@ button { cursor:pointer; }
   document.querySelectorAll('.hero .hero-text > *').forEach(function (el) {
     setTimeout(function () { el.classList.add('revealed'); }, 60);
   });
+
+  /* ---- Apple-style sticky scroll — How It Works ---- */
+  (function () {
+    var steps = document.querySelectorAll('.ahiw-step');
+    var imgs  = document.querySelectorAll('.ahiw-img');
+    if (!steps.length || !imgs.length) return;
+
+    function activate(idx) {
+      steps.forEach(function (s) {
+        s.classList.toggle('is-active', s.dataset.ahiwStep === idx);
+      });
+      imgs.forEach(function (i) {
+        i.classList.toggle('is-active', i.dataset.ahiwStep === idx);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var ahiwObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) activate(entry.target.dataset.ahiwStep);
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '-38% 0px -38% 0px'
+      });
+      steps.forEach(function (s) { ahiwObs.observe(s); });
+    } else {
+      steps.forEach(function (s) { s.classList.add('is-active'); });
+      imgs.forEach(function (i) { i.classList.add('is-active'); });
+    }
+  })();
 
 })();
 </script>
