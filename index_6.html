@@ -676,32 +676,31 @@ a[aria-disabled="true"] {
   letter-spacing: -0.01em;
   max-width: 540px;
 }
-.ahiw-blame {
-  margin-top: 72px;
-  padding-top: 64px;
+.blame-section {
+  background: var(--bg);
+  padding: 130px 0;
   border-top: 1px solid var(--border);
-  max-width: 680px;
+  border-bottom: 1px solid var(--border);
 }
-.ahiw-blame-setup {
-  font-size: 15px;
+.blame-setup {
+  font-size: 16px;
   font-weight: 300;
   color: var(--muted);
   line-height: 1.75;
-  margin-bottom: 20px;
-  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  max-width: 560px;
 }
-.ahiw-blame-hit {
+.blame-hit {
   font-family: var(--serif);
-  font-size: clamp(44px, 5.8vw, 78px);
+  font-size: clamp(52px, 7.2vw, 100px);
   font-weight: 300;
   color: var(--text);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
 }
-.ahiw-blame-hit em {
+.blame-hit em {
   font-style: italic;
   color: var(--accent);
-  display: block;
 }
 
 .ahiw-body {
@@ -1667,16 +1666,22 @@ a[aria-disabled="true"] {
 </section>
 
 <!-- =============================================
+     BLAME — FEAR STATEMENT
+     ============================================= -->
+<section class="blame-section" aria-label="The risk">
+  <div class="wrap">
+    <p class="blame-setup reveal">If something feels off after the meal, they won't blame the commute.</p>
+    <p class="blame-hit reveal">They'll blame the last<br>place they ate — <em>yours.</em></p>
+  </div>
+</section>
+
+<!-- =============================================
      HOW IT WORKS — STICKY SCROLL
      ============================================= -->
 <section class="ahiw" id="how-it-works" aria-labelledby="ahiw-heading">
   <div class="ahiw-header reveal">
     <div class="ahiw-eyebrow">How It Works</div>
     <h2 id="ahiw-heading" class="ahiw-h2">30 seconds. Clean hands every time.</h2>
-    <div class="ahiw-blame">
-      <p class="ahiw-blame-setup">If something feels off after the meal,<br>they won't blame the commute.</p>
-      <p class="ahiw-blame-hit">They'll blame<br><em>yours.</em></p>
-    </div>
   </div>
 
   <div class="ahiw-body">
