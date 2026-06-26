@@ -1283,15 +1283,25 @@ button { cursor:pointer; }
    RESPONSIVE
    ============================================= */
 @media (max-width: 960px) {
-  .ahiw-header { padding: 72px 28px 48px; }
-  .ahiw-body { flex-direction: column; padding: 0 28px; }
-  .ahiw-media { display: none; }
-  .ahiw-steps { width: 100%; padding-bottom: 0; }
-  .ahiw-step { min-height: auto; opacity: 1; border-left: none; padding: 0 0 52px; }
-  .ahiw-step.is-active { border-left: none; }
-  .ahiw-step:first-child, .ahiw-step:last-child { min-height: auto; }
-  .ahiw-step-img { display: block; border-radius: 3px; overflow: hidden; margin-bottom: 28px; }
-  .ahiw-step-img img { width: 100%; height: auto; display: block; }
+  /* mobile: sticky image at top, steps scroll below */
+  .ahiw { padding-bottom: 72px; }
+  .ahiw-header { padding: 72px 24px 44px; }
+  .ahiw-body { flex-direction: column; padding: 0; }
+  .ahiw-media {
+    display: block;
+    width: 100%;
+    height: 44vh;
+    top: 68px;
+    margin-right: 0;
+    border-radius: 0;
+    z-index: 5;
+  }
+  .ahiw-steps { width: 100%; padding: 0 24px; padding-bottom: 0; position: relative; z-index: 1; }
+  .ahiw-step { min-height: 62vh; padding: 36px 0 36px 22px; }
+  .ahiw-step:first-child { min-height: 52vh; }
+  .ahiw-step:last-child  { min-height: 52vh; }
+  .ahiw-desc { max-width: 100%; }
+  .ahiw-step-img { display: none; }
   .wrap, .nav-inner, .footer-inner, .fear-inner { padding-left:28px; padding-right:28px; }
   .hero { background-image: url('mobile-hero.png'); background-position: top center; }
   .hero::before { background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.88) 74%, rgba(0,0,0,0.97) 100%); }
@@ -2025,13 +2035,15 @@ button { cursor:pointer; }
     }
 
     if ('IntersectionObserver' in window) {
+      var isMobile = window.innerWidth <= 960;
       var ahiwObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) activate(entry.target.dataset.ahiwStep);
         });
       }, {
         threshold: 0,
-        rootMargin: '-38% 0px -38% 0px'
+        /* mobile: sticky image ~52% of viewport from top; trigger in 55–82% band */
+        rootMargin: isMobile ? '-55% 0px -18% 0px' : '-38% 0px -38% 0px'
       });
       steps.forEach(function (s) { ahiwObs.observe(s); });
     } else {
