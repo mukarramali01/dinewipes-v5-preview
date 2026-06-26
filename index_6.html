@@ -676,19 +676,32 @@ a[aria-disabled="true"] {
   letter-spacing: -0.01em;
   max-width: 540px;
 }
-.ahiw-fear {
-  margin-top: 28px;
-  max-width: 540px;
-  padding: 20px 24px;
-  border: 1px solid rgba(111,152,168,0.2);
-  border-left: 3px solid var(--accent);
-  background: rgba(111,152,168,0.05);
-  border-radius: 1px;
+.ahiw-blame {
+  margin-top: 72px;
+  padding-top: 64px;
+  border-top: 1px solid var(--border);
+  max-width: 680px;
+}
+.ahiw-blame-setup {
   font-size: 15px;
   font-weight: 300;
   color: var(--muted);
   line-height: 1.75;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+.ahiw-blame-hit {
+  font-family: var(--serif);
+  font-size: clamp(44px, 5.8vw, 78px);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.ahiw-blame-hit em {
   font-style: italic;
+  color: var(--accent);
+  display: block;
 }
 
 .ahiw-body {
@@ -1660,7 +1673,10 @@ a[aria-disabled="true"] {
   <div class="ahiw-header reveal">
     <div class="ahiw-eyebrow">How It Works</div>
     <h2 id="ahiw-heading" class="ahiw-h2">30 seconds. Clean hands every time.</h2>
-    <p class="ahiw-fear">If something feels off after the meal, they won't blame the commute. They'll blame the last place they ate — yours.</p>
+    <div class="ahiw-blame">
+      <p class="ahiw-blame-setup">If something feels off after the meal,<br>they won't blame the commute.</p>
+      <p class="ahiw-blame-hit">They'll blame<br><em>yours.</em></p>
+    </div>
   </div>
 
   <div class="ahiw-body">
